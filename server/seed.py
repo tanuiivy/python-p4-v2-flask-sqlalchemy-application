@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-#server/seed.py
-from random import choice as rc
+# server/seed.py
+
+from random import choice as rc, randint
 from faker import Faker
 
 from app import app
@@ -21,7 +22,11 @@ with app.app_context():
 
     # Add some Pet instances to the list
     for n in range(10):
-        pet = Pet(name=fake.first_name(), species=rc(species))
+        pet = Pet(
+            name=fake.first_name(),
+            species=rc(species),
+            age=randint(1, 15)  # Add a random age between 1 and 15
+        )
         pets.append(pet)
 
     # Insert each Pet in the list into the "pets" table
